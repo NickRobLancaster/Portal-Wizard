@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Client Portal Wizard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body id="appBody">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <form>
+                        <div class="row" v-show="node_1 == true">
+                            <div class="col-md-12">
+                                <h1 class="text-center">Welcome to Titan Prep</h1>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Hello and Welcome. As part of our ongoing commitment to you, our clients, our goal is to make this transition as simple as possible. To do so, we will need some basic information from you prior to getting on the phone with you. Once on the phone, we will be able to review your current situation together and ensure that you are on the best path towards your financial goals for your student loan debt. To begin this process please complete each section below to the best of your ability.&nbsp;</p>
+                            </div>
+                            <div class="col-md-6"><a class="btn btn-info" role="button" data-toggle="modal" href="#myModal"><i class="fa fa-id-card fa-lg"></i>&nbsp;View Case Manager Contact Details</a></div>
+                            <div class="col-md-6 text-right">
+                                <div><button class="btn btn-success" type="button" v-on:click="setNodeOneTrue">Update Online Profile&nbsp;<i class="fa fa-bolt fa-lg"></i></button></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title">Case Manager Contact Information</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p style="font-size: 16px;">If you need assistance completing this online profile update, have any questions during this process, or would simply prefer to complete your renewal by phone with your personal Account Manager please feel free to give us a call anytime:<br><br><strong>Office Hours:</strong> 9AM - 6PM PST<br><strong>Case Manager Phone:</strong> <a href="tel: 16572076797">657-204-6797</a>&nbsp;<br><br>Thank you.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer"><button class="btn btn-default" data-dismiss="modal" type="button">Close</button><a class="btn btn-success" role="button" href="tel: 16572076797">Call Now</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" v-show="node_2 == true">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Basic Details</h2>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="alert alert-success" role="alert"><span><i class="fa fa-exclamation-circle fa-lg"></i><strong>&nbsp;Please verify that your information we have on file is accurate. Should you find information that is not accurate, please update.</strong></span></div>
+                            </div>
+                            <div class="col-md-12">
+                                <h4>Address</h4>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-8"><label>Street Address</label><input class="form-control" type="text" v-model="address" v-on:input="revealNextEmployment"></div>
+                                    <div class="col-md-4"><label>Apt / Unit</label><input class="form-control" type="text" v-model="address_2" v-on:click="revealNextEmployment"></div>
+                                    <div class="col-md-6"><label>City</label><input class="form-control" type="text" v-model="city" v-on:input="revealNextEmployment"></div>
+                                    <div class="col-md-4"><label>State</label><input class="form-control" type="text" v-model="state" v-on:click="revealNextEmployment"></div>
+                                    <div class="col-md-2"><label>Zip</label><input class="form-control" type="text" v-model="zip" v-on:input="revealNextEmployment"></div>
+                                    <div class="col-md-12">
+                                        <h4>Contact Info</h4>
+                                    </div>
+                                    <div class="col-md-6"><label>Primary Phone</label><input class="form-control" type="text" v-model="primary_phone" v-on:input="revealNextEmployment"></div>
+                                    <div class="col-md-6"><label>Mobile Phone</label><input class="form-control" type="text" v-model="mobile_phone" v-on:input="revealNextEmployment"></div>
+                                    <div class="col-md-12"><label>Best Available Time to Call {{&nbsp;<strong>best_time_to_call</strong>&nbsp;}}</label><select class="form-control" v-model="best_time_to_call" v-on:input="revealNextEmployment">
+                                            <option value="1">8AM</option>
+                                        </select></div>
+                                    <div class="col-md-12">
+                                        <h4>Security Details</h4>
+                                    </div>
+                                    <div class="col-md-6"><label>Date of Birth {{ dob }}</label><input class="form-control" type="date" v-model="dob" value="dob" name="dob"></div>
+                                    <div class="col-md-6"><label>Social Security Number {{ ssn }}</label><input class="form-control" type="text" v-model="ssn" v-on:input="revealNextEmployment"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-6"><button class="btn btn-warning" type="button" v-on:click="backToNodeOne"><i class="fa fa-long-arrow-left fa-lg"></i>&nbsp;Cancel, Go Back</button></div>
+                            <div class="col-md-6 col-xs-6 text-right"><button class="btn btn-success" type="button" v-on:click="setNodeTwoTrue" v-show="show_next_employment == false"><strong>Employment&nbsp;</strong><i class="fa fa-long-arrow-right fa-lg"></i></button></div>
+                        </div>
+                        <div class="row" v-show="node_3 == true">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Employment</h2>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12"><label>2) Are You Employed?</label>
+                                        <div class="radio"><label><input type="radio" v-model="is_employed" value="1" name="is_employed" v-on:change="clearIsNotEmployedBranch">Yes</label></div>
+                                        <div class="radio"><label><input type="radio" v-model="is_employed" name="is_employed" value="2" v-on:change="revealNextPSLF">No</label></div>
+                                    </div>
+                                    <div class="col-md-12" v-show="is_employed == 1">
+                                        <div class="row">
+                                            <div class="col-md-12" v-show="is_employed == 1">
+                                                <div class="alert alert-success" role="alert"><span><i class="fa fa-exclamation-circle fa-lg"></i><strong>&nbsp;Please confirm your employment&nbsp;information below. You may update your information if it has changed.</strong></span></div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Employer Details</h4>
+                                            </div>
+                                            <div class="col-md-12"><label>Employer Name</label><input class="form-control" type="text" v-model="employer_name"></div>
+                                            <div class="col-md-8"><label>Employer Address</label><input class="form-control" type="text" v-model="address"></div>
+                                            <div class="col-md-4"><label>Suite / Unit</label><input class="form-control" type="text" v-model="employer_address_2"></div>
+                                            <div class="col-md-6"><label>City</label><input class="form-control" type="text" v-model="employer_city"></div>
+                                            <div class="col-md-4"><label>State</label><input class="form-control" type="text" v-model="employer_state"></div>
+                                            <div class="col-md-2"><label>Zip</label><input class="form-control" type="text" v-model="employer_zip"></div>
+                                            <div class="col-md-12"><label>Pay Frequency</label>
+                                                <div class="radio"><label><input type="radio" v-model="pay_frequency" name="pay_frequency" value="1">Weekly</label></div>
+                                                <div class="radio"><label><input type="radio" v-model="pay_frequency" name="pay_frequency" value="2">Bi-Weekly</label></div>
+                                                <div class="radio"><label><input type="radio" v-model="pay_frequency" name="pay_frequency" value="3">Bi-Montnly</label></div>
+                                                <div class="radio"><label><input type="radio" v-model="pay_frequency" name="pay_frequency" value="4">Monthly</label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" v-show="is_employed == 2">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4>Taxable Income</h4>
+                                            </div>
+                                            <div class="col-md-12"><label>2A) Are You Receiving Taxable Income?</label>
+                                                <div class="radio"><label><input type="radio" v-model="taxable_income" value="1" name="taxable_income" v-on:click="clearFormOfIncome">Yes</label></div>
+                                                <div class="radio"><label><input type="radio" v-model="taxable_income" value="2" name="taxable_income" v-on:change="clearFormOfIncome">No</label></div>
+                                            </div>
+                                            <div class="col-md-12" v-show="taxable_income == 1"><label>Select Form of Income</label>
+                                                <div class="radio"><label><input type="radio" v-model="type_of_income" value="1" name="type_of_income" v-on:change="revealNextPSLF">Unemployment Benefits</label></div>
+                                                <div class="radio"><label><input type="radio" v-model="type_of_income" value="2" name="type_of_income" v-on:change="revealNextPSLF">Social Security Benefits (SSI)</label></div>
+                                                <div class="radio"><label><input type="radio" v-model="type_of_income" value="3" name="type_of_income" v-on:change="revealNextPSLF">Social Security Disability Income (SSDI)</label></div>
+                                                <div class="radio"><label><input type="radio" v-model="type_of_income" value="4" name="type_of_income" v-on:change="revealNextPSLF">Pension / Retirement</label></div>
+                                                <div class="radio"><label><input type="radio" v-model="type_of_income" value="5" name="type_of_income" v-on:change="revealNextPSLF">Other</label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"><button class="btn btn-warning" type="button" v-on:click="backToNodeTwo"><i class="fa fa-long-arrow-left fa-lg"></i>&nbsp;<strong>Basic Details</strong></button></div>
+                            <div class="col-md-6 text-right"><button class="btn btn-success" type="button" v-on:click="moveToTaxFilingNode" v-show="taxable_income == 2 || type_of_income > 0"><strong>Tax Filing&nbsp;</strong><i class="fa fa-long-arrow-right fa-lg"></i></button><button class="btn btn-success" type="button" v-on:click="setNodeThreeTrue" v-show="is_employed == true &amp;&amp; pay_frequency > 0"><strong>Public Service&nbsp;</strong><i class="fa fa-long-arrow-right fa-lg"></i></button></div>
+                        </div>
+                        <div class="row" v-show="node_4 == true">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Public Service Loan Forgiveness</h2>
+                            </div>
+                            <div class="col-md-12"><label>3) Is your employer a city, state, government, county or non profit organization?</label>
+                                <div class="radio"><label><input type="radio" v-model="pslf" name="pslf" value="1">Yes</label></div>
+                                <div class="radio"><label><input type="radio" name="pslf" v-model="pslf" value="2" v-on:click="clearPSLFisYesBranch">No</label></div>
+                            </div>
+                            <div class="col-md-12" v-show="pslf == 1"><label>3A) Do you work an average of 30 hours per week or more?</label>
+                                <div class="radio"><label><input type="radio" v-model="more_than_30_hours" name="more_than_30_hours" value="1" v-on:click="resetFullTimePartTime">Yes</label></div>
+                                <div class="radio"><label><input type="radio" name="more_than_30_hours" v-model="more_than_30_hours" value="2" v-on:change="reveal_">No</label></div>
+                            </div>
+                            <div class="col-md-12" v-show="more_than_30_hours == 1">
+                                <div class="alert alert-success" role="alert"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;This means that you may be eligible for a significant benefit on the length of your program and potentially a large tax benefit. Please be aware, should you have a dollar-amount payment thisyear, it is VITAL that you make your payments ON-TIME EVERY MONTH. If your payment is more than 15 days late, that payment will not count as a “qualifying payment” towards your Public Service Loan Forgiveness benefits.</span></div>
+                            </div>
+                            <div class="col-md-12" v-show="more_than_30_hours == 2"><label><strong>Which of the following does your employer consider you?</strong></label>
+                                <div class="radio"><label><input type="radio" v-model="type_employment_considered" name="type_employment_considered" value="1">Full - Time</label></div>
+                                <div class="radio"><label><input type="radio" name="type_employment_considered" v-model="type_employment_considered" value="2">Part - Time / Per Diem</label></div>
+                                <div class="radio"><label><input type="radio" name="type_employment_considered" v-model="type_employment_considered" value="3">Unsure</label></div>
+                                <div class="alert alert-success" role="alert" v-show="type_employment_considered == 1"><span><i class="fa fa-exclamation-circle fa-lg"></i><strong>&nbsp;</strong>If you are a full-time employee then you are considered eligible, it doesn’t hurt to apply. Download the form here -&gt;&nbsp;<a class="alert-link" href="#">PSLF Form for Borrower</a>&nbsp;Bring this form to your Manager or HR Department to complete and return to help determine your eligibility.<br></span></div>
+                                <div class="alert alert-success" role="alert" v-show="type_employment_considered == 3"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;The PSLF program offers significant benefits for which You MAY qualify and does not adversely affect you to inquire. We will provide you the form for your HR department to complete and return to help determine your eligibility.</span></div>
+                            </div>
+                            <div class="col-md-6"><button class="btn btn-warning" type="button" v-on:click="backToNodeThree"><i class="fa fa-long-arrow-left fa-lg"></i>&nbsp;<strong>Employment</strong></button></div>
+                            <div class="col-md-6 text-right"><button class="btn btn-success" type="button" v-on:click="setNodeFourTrue" v-show="more_than_30_hours == 1 || type_employment_considered > 0 || reveal_next_tax_filing == true || pslf == 2"><strong>Tax Filing&nbsp;</strong><i class="fa fa-long-arrow-right fa-lg"></i></button></div>
+                        </div>
+                        <div class="row" v-show="node_5 == true">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Tax Filing</h2>
+                            </div>
+                            <div class="col-md-12"><label>4) What is your Tax Filing Status</label>
+                                <div class="radio"><label><input type="radio" name="tax_filing_status" value="1" v-model="tax_filing_status">Single</label></div>
+                                <div class="radio"><label><input type="radio" name="tax_filing_status" value="2" v-model="tax_filing_status">Married Filing Jointly</label></div>
+                                <div class="radio"><label><input type="radio" name="tax_filing_status" value="3" v-model="tax_filing_status">Married Filing Separately</label></div>
+                                <div class="radio"><label><input type="radio" name="tax_filing_status" value="4" v-model="tax_filing_status">Head of Household</label></div>
+                            </div>
+                            <div class="col-md-6"><button class="btn btn-warning" type="button" v-on:click="backToNodeFour" v-show="is_employed == 1"><i class="fa fa-long-arrow-left fa-lg"></i>&nbsp;<strong>Public Service</strong></button><button class="btn btn-warning" type="button" v-on:click="backToEmploymentNode" v-show="is_employed == 2"><i class="fa fa-long-arrow-left fa-lg"></i>&nbsp;<strong>Employment</strong></button></div>
+                            <div class="col-md-6 text-right"><button class="btn btn-success" type="button" v-on:click="setNodeFiveTrue" v-show="tax_filing_status > 0"><strong>Income Details&nbsp;</strong><i class="fa fa-long-arrow-right fa-lg"></i></button></div>
+                        </div>
+                        <div class="row" v-show="node_6 == true">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Income Details</h2>
+                            </div>
+                            <div class="col-md-12" v-show="tax_filing_status == 2"><label>5) Are you currently separated from your spouse?</label>
+                                <div class="radio"><label><input type="radio" name="separated_from_spouse" value="1" v-model="separated_from_spouse">Yes</label></div>
+                                <div class="radio"><label><input type="radio" name="separated_from_spouse" value="2" v-model="separated_from_spouse">No</label></div>
+                                <div class="alert alert-success" role="alert" v-show="separated_from_spouse == 1"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;The best option would be to utilize your current paystubs then. We will need pay stubs reflecting the last 30 consecutive days. The number of paystubs you need to submit is determined by your pay frequency.<br></span>
+                                    <ul>
+                                        <li>Weekly = 4 Paystubs</li>
+                                        <li>Bi-Weekly = 2 Paystubs</li>
+                                        <li>Bi-Monthly = 2 Paystubs</li>
+                                        <li>Monthly = 1 Paystub</li>
+                                    </ul>
+                                </div>
+                                <div class="alert alert-danger" role="alert" v-show="separated_from_spouse == 2"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;There have been a lot of changes over the years with regards to spouse requirements when submitting an IDR Application. Like most government assistance programs, if you are married, your spouse’s income information will be included in calculating monthly payments, even if you file your taxes separately. However, a borrower may request that ONLY his/her income be included if the borrower certifies that they are separated from their spouse <strong>or unable to reasonably access the spouse’s income information.</strong><br><br><strong>Ultimately, unless you share finances with your spouse or they are a co-signer on your loans, they are not obligated to assist in your repayment. Based upon your current situation, please answer the following questions to the best of your abilities.</strong><br></span></div>
+                            </div>
+                            <div class="col-md-12" v-show="separated_from_spouse == 2"><label>5A) Do you have access to your Spouse's Income? access to spouse income: {{access_to_spouse_income}} | is employed: {{is_employed }} | taxable income: {{&nbsp;<strong>taxable_income }}</strong></label>
+                                <div class="radio"><label><input type="radio" name="access_to_spouse_income" value="1" v-model="access_to_spouse_income" v-on:change="questionFiveA">Yes</label></div>
+                                <div class="radio"><label><input type="radio" name="access_to_spouse_income" value="2" v-model="access_to_spouse_income" v-on:change="questionFiveA">No</label></div>
+                                <div class="alert alert-success" role="alert" v-show="access_to_spouse_income == 2 &amp;&amp; taxable_income == 2"><i class="fa fa-exclamation-circle fa-lg" v-show="access_to_spouses_income == 2 &amp;&amp; taxable_income == 2"></i><span>&nbsp;You are going to need to submit a Letter of Explanation that details where you're income is coming from.</span></div>
+                                <div class="alert alert-success" role="alert" v-show="access_to_spouses_income == 2 &amp;&amp; is_employed == 1"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;The best option would be to utilize your current paystubs then. We will need pay stubs reflecting the last 30 consecutive days. The number of paystubs you need to submit is determined by your pay frequency.<br></span>
+                                    <ul>
+                                        <li>Weekly = 4 Paystubs</li>
+                                        <li>Bi-Weekly = 2 Paystubs</li>
+                                        <li>Bi-Monthly = 2 Paystubs</li>
+                                        <li>Monthly = 1 Paystub</li>
+                                    </ul>
+                                </div>
+                                <div class="alert alert-danger" role="alert" v-show="access_to_spouse_income == 1"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Your spouse will be required to give their personal information and sign on your application. Also, yourspouse’s income will be added to yours for the payment calculation.<br></span></div>
+                            </div>
+                            <div class="col-md-12" v-show="access_to_spouse_income == 1"><label>5B) Can you submit your Spouse's Income Documentation?</label>
+                                <div class="radio"><label><input type="radio" name="can_submit_for_spouse" value="1" v-model="can_submit_for_spouse">Yes</label></div>
+                                <div class="radio"><label><input type="radio" name="can_submit_for_spouse" value="2" v-model="can_submit_for_spouse">No</label></div>
+                            </div>
+                            <div class="col-md-12" v-show="can_submit_for_spouse == 1"><label>5C) Does your spouse have Federal Student Loans?</label>
+                                <div class="radio"><label><input type="radio" name="spouse_has_federal_loans" value="1" v-model="spouse_has_federal_loans">Yes</label></div>
+                                <div class="radio"><label><input type="radio" name="spouse_has_federal_loans" value="2" v-model="spouse_has_federal_loans">No</label></div>
+                            </div>
+                            <div class="col-md-12" v-show="spouse_has_federal_loans == 1"><label>What is your spouses Federal Loan Balance?</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span><i class="fa fa-dollar"></i></span></div><input class="form-control" type="text" v-model="spouse_federal_loan_balance">
+                                </div>
+                            </div>
+                            <div class="col-md-12" v-if="spouse_federal_loan_balance > 0"><label>5D) Is your spouse currently working?</label>
+                                <div class="radio"><label><input type="radio" name="spouse_currently_working" value="1" v-model="spouse_currently_working">Yes</label></div>
+                                <div class="radio"><label><input type="radio" name="spouse_currently_working" value="2" v-model="spouse_currently_working">No</label></div>
+                            </div>
+                            <div class="col-md-12" v-show="spouse_currently_working == 1 &amp;&amp; is_employed == 2"><label>5E) What is your spouses Gross Income per month?</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span><i class="fa fa-dollar"></i></span></div><input class="form-control" type="text" v-model="spouse_gross_income_monthly" v-on:keyup="getYearlyIncome($event)">
+                                </div><label>Spouse Estimated Yearly Gross Income</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span><i class="fa fa-dollar"></i></span></div><input class="form-control" type="text" v-model="spouse_gross_income_yearly" v-on:keyup="getMonthlyIncome($event)">
+                                </div>
+                            </div>
+                            <div class="col-md-12" v-show="tax_filing_status == 1 || tax_filing_status == 3 || tax_filing_status == 4">
+                                <div class="alert alert-info" role="alert" v-show="separated_from_spouse == 2"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;One of the requirements for an income driven program is that you must submit your income on an annual basis for review. Please select one of the options below to determine the best option for income verification.<br></span></div><label>6) Are you making More, Less, or about the same income this year versus last year?</label>
+                                <div class="radio"><label><input type="radio" name="more_less_same" value="1" v-model="more_less_same">More than last year</label></div>
+                                <div class="radio"><label><input type="radio" name="more_less_same" value="2" v-model="more_less_same">Less than last year</label></div>
+                                <div class="radio"><label><input type="radio" name="more_less_same" value="3" v-model="more_less_same">Same as last year</label></div>
+                                <div class="alert alert-success" role="alert" v-show="more_less_same == 1"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Q6A) Typically, your best option would be to use your last year’s tax return then. This is the first two pages ofyour 1040 form.<br></span></div>
+                                <div class="alert alert-success" role="alert" v-show="more_less_same == 2 || separated_from_spouse == 1 || reveal_6b == true"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Q6B) The best option would be to utilize your current paystubs then. We will need pay stubs reflecting the last 30 consecutive days. The number of paystubs you need to submit is determined by your pay frequency.<br></span>
+                                    <ul>
+                                        <li>Weekly = 4 Paystubs</li>
+                                        <li>Bi-Weekly = 2 Paystubs</li>
+                                        <li>Bi-Monthly = 2 Paystubs</li>
+                                        <li>Monthly = 1 Paystub</li>
+                                    </ul>
+                                </div>
+                                <div class="alert alert-success" role="alert" v-show="more_less_same == 3"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Q6C) You can either submit last year’s tax return or the most recent 30 consecutive days of paystubs. This can be either the first two pages of your 1040 form or your pay stubs covering the last 30 consecutive days. If you are paid:<br></span>
+                                    <ul>
+                                        <li>Weekly = 4 Paystubs</li>
+                                        <li>Bi-Weekly = 2 Paystubs</li>
+                                        <li>Bi-Monthly = 2 Paystubs</li>
+                                        <li>Monthly = 1 Paystub</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-6"><button class="btn btn-warning" type="button" v-on:click="backToNodeFive"><i class="fa fa-long-arrow-left fa-lg"></i>&nbsp;<strong>Tax Filing</strong></button></div>
+                            <div class="col-md-6 col-xs-6 text-right"><button class="btn btn-success" type="button" v-on:click="setNodeSixTrue" v-show="more_less_same > 0 || separated_from_spouse == 1 || reveal_family_size_next == true || spouse_gross_income_monthly > 0"><strong>Family Size&nbsp;</strong><i class="fa fa-long-arrow-right fa-lg"></i></button></div>
+                        </div>
+                        <div class="row" v-show="node_7 == true">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Family Size</h2>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="alert alert-info" role="alert" v-show="separated_from_spouse == 1"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Household size is not determined by your taxes but rather a few different variables, so please answer the following questions to the best of your ability.&nbsp;Children that qualify are either, unborn children, receive child support -OR- receive financial support 6 months or more of the year from you.<br></span></div><label>7A) I<strong>ncluding unborn children and children outside your home, how many people under the age of 18 do you financially support?</strong></label><input class="form-control" type="text" v-model="family_size_under_18_unborn">
+                            </div>
+                            <div class="col-md-12" v-show="tax_filing_status == 2 || tax_filing_status == 3"><label>7B)&nbsp;<strong>Not including your spouse or children under 18, how many other people live in your home with you?</strong></label><input class="form-control" type="text" v-model="household_size_excluding_children_spouse"></div>
+                            <div class="col-md-12" v-show="tax_filing_status == 1 || tax_filing_status == 4"><label><strong>7B2) Excluding children, how many other people live in your home with you?</strong></label><input class="form-control" type="text" v-model="other_people_living_with_you"></div>
+                            <div class="col-md-12"><label><strong>7C) Finally, how many people do you financially support 6 months or more out of the year, that do not live with you?</strong><br></label><input class="form-control" type="text" v-model="support_6_months_outside_house"></div>
+                            <div class="col-md-6"><button class="btn btn-warning" type="button" v-on:click="backToNodeSix"><i class="fa fa-long-arrow-left fa-lg"></i>&nbsp;<strong>Income Details</strong></button></div>
+                            <div class="col-md-6 text-right"><button class="btn btn-success" type="button" v-on:click="setNodeSevenTrue" v-show="support_6_months_outside_house > 0"><strong>Documents&nbsp;</strong><i class="fa fa-long-arrow-right fa-lg"></i></button></div>
+                        </div>
+                        <div class="row" v-show="node_8 == true">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Requested Documents</h2>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="alert alert-success" role="alert"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Based on your answers these are the documents that we need to collect from you below. Please locate and upload your documents.<br></span></div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3" v-show="pay_frequency == 1 || pay_frequency == 2 || pay_frequency == 3 || pay_frequency == 4"><label>Paycheck Stub 1</label><input type="file" style="width: 100%;height: 75px;border: dotted gray 2px; border-radius: 5px"></div>
+                                    <div class="col-md-3" v-show="pay_frequency == 1 || pay_frequency == 2 || pay_frequency == 3"><label>Paycheck Stub 2</label><input type="file" style="width: 100%;height: 75px;border: dotted gray 2px; border-radius: 5px"></div>
+                                    <div class="col-md-3" v-show="pay_frequency == 1"><label>Paycheck Stub 3</label><input type="file" style="width: 100%;height: 75px;border: dotted gray 2px; border-radius: 5px"></div>
+                                    <div class="col-md-3" v-show="pay_frequency == 1"><label>Paycheck Stub 4</label><input type="file" style="width: 100%;height: 75px;border: dotted gray 2px; border-radius: 5px"></div>
+                                    <div class="col-md-3" v-show="taxable_income == 1"><label>Award Letter</label><input type="file" style="width: 100%;height: 75px;border: dotted gray 2px; border-radius: 5px"></div>
+                                    <div class="col-md-3" v-show="taxable_income == 1"><label><strong>1040 Tax Forms Pg. 1 &amp; 2</strong></label><input type="file" style="width: 100%;height: 75px;border: dotted gray 2px; border-radius: 5px"></div>
+                                    <div class="col-md-3" v-show="taxable_income == 2"><label>Letter of Explanation</label><input type="file" style="width: 100%;height: 75px;border: dotted gray 2px; border-radius: 5px"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12" v-if="spouse_currently_working == 1"><label>Spouse - Select your spouses income document.</label><input type="file" style="width: 100%;height: 75px;border: dotted gray 2px; border-radius: 5px"></div>
+                                    <div class="col-md-12"><label>Select the way you would like to submit your Student Loan File</label>
+                                        <div class="radio"><label><input type="radio" v-model="doc_submission_preference" name="doc_submission_preference" value="1">Upload to this Portal</label></div>
+                                        <div class="radio"><label><input type="radio" name="doc_submission_preference" value="2" v-model="doc_submission_preference">Email it to my Case Email</label></div>
+                                        <div class="radio"><label><input type="radio" name="doc_submission_preference" value="3" v-model="doc_submission_preference">I'm unable to access my Student Loan Text File</label></div>
+                                    </div>
+                                    <div class="col-md-12" v-show="doc_submission_preference == 1"><label>Upload Your Student Loan Text File</label><input type="file" style="width: 100%;height: 75px;border: dotted gray 2px; border-radius: 5px"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-6"><button class="btn btn-warning" type="button" v-on:click="backToNodeSeven"><i class="fa fa-long-arrow-left fa-lg"></i>&nbsp;<strong>Family Size</strong></button></div>
+                            <div class="col-md-6 col-xs-6 text-right"><button class="btn btn-success" type="button" v-on:click="setNodeEightTrue"><strong>Other Ways to Submit Docs&nbsp;</strong><i class="fa fa-long-arrow-right fa-lg"></i></button></div>
+                        </div>
+                        <div class="row" v-show="node_9 == true">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Other Ways to Submit Your Docs</h2>
+                            </div>
+                            <div class="col-md-12"><label>How would you like to submit these documents?</label>
+                                <div class="radio"><label><input type="radio" v-model="submitting_documents_via" name="submitting_documents_via" value="1">Upload to Your Client Portal by going to: <a href="studentservicesupport.com"><strong>StudentServiceSupport.com</strong></a></label></div>
+                                <div class="radio"><label><input type="radio" name="submitting_documents_via" value="2" v-model="submitting_documents_via">Take a Picture</label></div>
+                                <div class="radio"><label><input type="radio" v-model="submitting_documents_via" value="3" name="submitting_documents_via">Email Attachment to your Assigned Case Email: <strong>case+123456@studentservicesupport.com</strong></label></div>
+                                <div class="radio"><label><input type="radio" v-model="submitting_documents_via" name="submitting_documents_via" value="4">Fax It to: <strong>800-888-1234</strong></label></div>
+                                <div class="alert alert-info text-center" role="alert" v-show="submitting_documents_via == 1">
+                                    <h4><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Uploading Documents to Your Client Portal</h4><iframe allowfullscreen="" frameborder="0" width="560" height="315" style="border: solid gray 2px"></iframe>
+                                </div>
+                                <div class="alert alert-info" role="alert" v-show="submitting_documents_via == 2"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Please be sure to take excellent quality photos so your documents are not denied. Make sure to show all 4 corners of your document in the photo, must be well lit and not blurry in order to be accepted.</span></div>
+                                <div class="alert alert-info" role="alert" v-show="submitting_documents_via == 3"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;You can compose an email with your above Case Email and attach your income document to the email usually by clicking the attachment button that looks something like a paperclip similar to this --&gt;&nbsp;<i class="fa fa-paperclip fa-lg"></i>. Browser your files to locate the document and select it. Your document should now be added to your email and ready to send.</span></div>
+                                <div class="alert alert-danger" role="alert" v-show="submitting_documents_via == 4"><span><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Although we offer Fax as a method for collecting your documents, it isn't a preferred method due to inconsistent delivery rates as well as diminished quality of the documents once they are received. We recommend that you use one of the previous 3 options to submit your documents.</span></div>
+                            </div>
+                            <div class="col-md-6 col-xs-6"><button class="btn btn-warning" type="button" v-on:click="backToNodeEight"><i class="fa fa-long-arrow-left fa-lg"></i>&nbsp;Back to:&nbsp;<strong>Requested Documents</strong></button></div>
+                            <div class="col-md-6 col-xs-6 text-right"><button class="btn btn-success" type="button"><i class="fa fa-flag-checkered fa-lg"></i>&nbsp;Complete Update&nbsp;<i class="fa fa-flag-checkered fa-lg"></i></button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
